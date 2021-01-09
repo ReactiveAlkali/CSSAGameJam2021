@@ -1,7 +1,7 @@
 public class Enemy extends Entity {
   
   private int speed = 2;
-  private int fireRate = 4;
+  private int fireRate = 100;
   private int fireTimer = 0;
   
   // Constructor for creating an enemy instance

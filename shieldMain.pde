@@ -11,6 +11,7 @@ void setup() {
 void draw() {
   background(123);
   game.draw();
+  game.drawGame();
 }
 
 void keyPressed () {
