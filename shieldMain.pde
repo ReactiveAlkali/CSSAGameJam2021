@@ -1,19 +1,20 @@
 Game game;
 
-float previousTimeMillis;
-
 void setup() {
-  size(1366, 768);
+  size(500, 500);
   game = new Game();
 }
 
 void draw() {
-
   background(123);
-  
+
   game.drawGame();
+  
 }
 
-void keyPressed() {
-  
+void keyPressed  () {
+  if (keyCode == TAB) {
+    game.activateShield();
+    println("this was run");
+  }
 }

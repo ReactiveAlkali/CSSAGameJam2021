@@ -1,45 +1,46 @@
+enum Status {
+  MENU, 
+    ACTIVE, 
+    INACTIVE;
+}
+
 public class Game {
-  private Player;
-  private Particle[];
-  
-  // variables for enemies
-  private ArrayList<Enemy> enemies;
-  private float enemyMoveRate;
-  
-  
+  private Player player;
+  private Status status;
+
   public Game() {
-    this.player  = new Player();
-    this.particle = new particle[numParticles];
-    
-    enemies = new ArrayList<Enemy>();
+    this.player = new Player();
+    this.status = Status.MENU;
+    //this.particle = new particle[numParticles];
   }
-  
-  drawGame(){
-    
+
+  public void drawGame() {
+    this.player.drawPlayer();
+    this.player.movePlayer();
+
+    activateShield();
   }
-  
-  void updateEnemies() {
-    
+
+
+  private void activateShield() {  
+    if (this.player.getShield() > 0) {
+      this.player.drawShield();
+    }
   }
-  
-  void ckeckEnemyCollisions() {
-    
+
+  private void checkStatus() {
+    if (this.player.getHealth() <= 0) {
+      this.status = Status.INACTIVE;
+    }
+    println(this.status);
   }
-  
-  void moveEnemies() {
-    
+
+  // === assessors ===
+  public Status getStatus() {
+    return this.status;
   }
- 
-  
-  // check for collision
-  
-  gameOver(){
+
+  private void setStatus(Status stat) {
+    this.status = stat;
   }
-  
-  setParticleCount() {
-     // removes an enemy from the list 
-  }
-  
-  
-  // dection
 }// Game
