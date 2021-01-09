@@ -15,6 +15,7 @@ public class Enemy extends Entity {
   }
   
   void draw() {
+    fill(#976520);
     ellipse(this.x, this.y, entityWidth, entityHeight);
   }
   
