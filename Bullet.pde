@@ -13,7 +13,7 @@ class Bullet extends Entity {
 
   void update()
   {
-    y -= speed;
+    x -= speed;
 
     if (y < - bDiameter)
     {
