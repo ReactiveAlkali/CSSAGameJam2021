@@ -24,12 +24,14 @@ public class Enemy extends Entity {
   
   void update() 
   {
+    moveEnemy();
+    
     //SHOOTING
     fireTimer -= 1;
     if(fireTimer <= 0 ) 
     {
       fireTimer = fireRate;
-      // create bullet
+      game.addBullet(this.x, this.y);
     }
   }
   
