@@ -1,7 +1,7 @@
 class Bullet extends Entity {
   float bDiameter;//works as both width and height for entity class
   boolean isAlive = true;//can be in entity
-  int speed = width * 2;//reaches end of screen in half second, may need balancing, for now only moves rigth to left
+  int speed = 5;//reaches end of screen in half second, may need balancing, for now only moves rigth to left
 
   public Bullet(int startX, int startY) {
     bDiameter = 20;
@@ -19,6 +19,7 @@ class Bullet extends Entity {
     {
       isAlive = false;
     }
+    draw();
   }
   
   void draw()//can be put into entity class
