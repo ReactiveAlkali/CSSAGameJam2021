@@ -24,6 +24,8 @@ public class Enemy extends Entity {
   
   void update() 
   {
+    moveEnemy();
+    
     //SHOOTING
     fireTimer -= 1;
     if(fireTimer <= 0 ) 
