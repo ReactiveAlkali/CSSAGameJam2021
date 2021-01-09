@@ -32,6 +32,7 @@ class Bullet extends Entity {
       pushMatrix();
       
       translate(x, y);
+      fill(#66a1e6);
       circle(-this.entityWidth/2, -this.entityWidth/2, this.entityWidth);
       
       popMatrix();
