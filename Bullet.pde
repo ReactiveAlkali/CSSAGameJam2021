@@ -1,5 +1,6 @@
+
 class Bullet extends Entity {
-  float bDiameter;//works as both width and height for entity class
+  int bDiameter;//works as both width and height for entity class
   boolean isAlive = true;//can be in entity
   int speed = 5;//reaches end of screen in half second, may need balancing, for now only moves rigth to left
 
@@ -9,13 +10,15 @@ class Bullet extends Entity {
 
     this.x = startX;
     this.y = startY;
+    this.entityWidth = bDiameter;
+    this.entityHeight = bDiameter;
   }
 
   void update()
   {
     x -= speed;
 
-    if (y < - bDiameter)
+    if (x < - this.entityWidth)
     {
       isAlive = false;
     }
@@ -29,7 +32,7 @@ class Bullet extends Entity {
       pushMatrix();
       
       translate(x, y);
-      circle(-bDiameter/2, -bDiameter/2, bDiameter);
+      circle(-this.entityWidth/2, -this.entityWidth/2, this.entityWidth);
       
       popMatrix();
     }
