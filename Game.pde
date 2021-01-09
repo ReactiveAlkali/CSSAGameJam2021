@@ -53,7 +53,9 @@ public class Game {
     
   }
  
- 
+  void addBullet(int x, int y) {
+    bullets.add(new Bullet(x, y));
+  }
   
   // check for collision
   
