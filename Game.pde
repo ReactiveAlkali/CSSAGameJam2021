@@ -1,3 +1,9 @@
+enum Status {
+  MENU, 
+    ACTIVE, 
+    INACTIVE;
+}
+
 public class Game {
   //private Player;
   private ArrayList<Bullet> bullets;
@@ -9,13 +15,25 @@ public class Game {
   
   
   public Game() {
-    //this.player  = new Player();
-    //this.particle = new particle[numParticles];
+   private Player player;
+   private Status status;
     
     enemies = new ArrayList<Enemy>();
     bullets = new ArrayList<Bullet>();
   }
   
+  public void drawGame() {
+    this.player.drawPlayer();
+    this.player.movePlayer();
+    this.player.drawShield();    
+    
+  }
+  private void checkStatus() {
+    if (this.player.getHealth() <= 0) {
+      this.status = Status.INACTIVE;
+    }
+  }
+
   void draw() {
     clear();
     background(255);
@@ -26,6 +44,26 @@ public class Game {
     updateEnemies();
   }
   
+  private void activateShield() {  
+      this.player.changeShieldStatus();
+  }
+  private void checkStatus() {
+    if (this.player.getHealth() <= 0) {
+      this.status = Status.INACTIVE;
+    }
+  }
+
+  // === assessors ===
+  public Status getStatus() {
+    return this.status;
+  }
+
+  private void setStatus(Status stat) {
+    this.status = stat;
+  }
+
+
+  //==========================
   void spawnEnemies() {
     enemySpawnTimer--;
     
@@ -74,3 +112,4 @@ public class Game {
   
   // dection
 }
+

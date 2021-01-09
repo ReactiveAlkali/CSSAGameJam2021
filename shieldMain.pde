@@ -1,3 +1,4 @@
+
 Game game;
 
 float previousTimeMillis;
@@ -8,12 +9,13 @@ void setup() {
 }
 
 void draw() {
-
   background(123);
-  
   game.draw();
 }
 
-void keyPressed() {
-  
+void keyPressed () {
+  if (keyCode == TAB) {
+    game.activateShield();
+    println("this was run");
+  }
 }
