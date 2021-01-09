@@ -11,7 +11,7 @@ void draw() {
 
   background(123);
   
-  game.drawGame();
+  game.draw();
 }
 
 void keyPressed() {

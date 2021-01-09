@@ -4,10 +4,10 @@ public class Player {
   }
   
   
-  drawPlayer(){
+  void draw(){
   }
   
-  movePlayer() {
+  void movePlayer() {
   }
   
   
