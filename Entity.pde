@@ -1,7 +1,7 @@
 abstract class Entity {
-  float x;
-  float y;
+  int x;
+  int y;
   
-  float entityWidth;
-  float entityHeight;
+  int entityWidth;
+  int entityHeight;
 }

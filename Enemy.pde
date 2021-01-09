@@ -2,14 +2,16 @@ public class Enemy extends Entity {
   
   // Constructor for creating an enemy instance
   // Accepts the location to construct the enemy
-  public Enemy(float x, float y) {
+  public Enemy(int x, int y) {
     this.x = x;
     this.y = y;
     
-    draw
+    this.entityWidth = 30;
+    this.entityHeight = 30;
   }
   
-  drawEnemy() {
+  void draw() {
+    ellipse(this.x, this.y, 
   }
   
   moveEnemy() {
