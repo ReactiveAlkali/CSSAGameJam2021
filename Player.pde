@@ -1,11 +1,8 @@
 
-public class Player {
-  private final int PLAYER_SIZE = 25;
+public class Player extends Entity {
   private final int DIAM = 100;
   private final int maxHealth = 100;
   private final int maxShield = 120;
-  private int x;
-  private int y;
 
   private int health;
   private int shield;
@@ -14,6 +11,8 @@ public class Player {
   public Player() {
     this.x = width/2;
     this.y = height/2;
+    this.entityWidth = 25;
+    this.entityHeight = 25;
     this.health = maxHealth;
     this.shield = maxShield;
     this.shieldStatus = false;
@@ -21,7 +20,7 @@ public class Player {
 
   public void drawPlayer() {
     fill(255);
-    rect(this.x - PLAYER_SIZE/2, this.y - PLAYER_SIZE/2, PLAYER_SIZE, PLAYER_SIZE);
+    rect(this.x - entityWidth/2, this.y - entityWidth/2, entityWidth, entityWidth);
   }
 
   private void movePlayer() {
