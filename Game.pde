@@ -1,15 +1,32 @@
 public class Game {
   private Player;
   private Particle[];
-  private Enemy[];
+  
+  // variables for enemies
+  private ArrayList<Enemy> enemies;
+  private float enemyMoveRate;
   
   
   public Game() {
     this.player  = new Player();
     this.particle = new particle[numParticles];
+    
+    enemies = new ArrayList<Enemy>();
   }
   
   drawGame(){
+    
+  }
+  
+  void updateEnemies() {
+    
+  }
+  
+  void ckeckEnemyCollisions() {
+    
+  }
+  
+  void moveEnemies() {
     
   }
  
