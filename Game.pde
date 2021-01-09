@@ -41,7 +41,7 @@ public class Game {
     for(Enemy e : enemies) 
       e.draw();
       
-    updateEnemies();
+    update();
   }
   
   private void activateShield() {  
@@ -75,7 +75,7 @@ public class Game {
     }
   }
   
-  void updateEnemies() {
+  void update() {
     spawnEnemies();
     
     for(int i = 0; i < enemies.size(); i++) {
@@ -85,6 +85,11 @@ public class Game {
       // Remove enemies as they exit the screen
       if(e.x <= 0)
         enemies.remove(i);
+    }
+    
+    for (Bullet q : bullets)
+    {
+      q.update();
     }
   }
   
