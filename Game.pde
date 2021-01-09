@@ -1,5 +1,5 @@
 public class Game {
-  private Player;
+  //private Player;
   private ArrayList<Bullet> bullets;
   
   // variables for enemies
@@ -13,6 +13,7 @@ public class Game {
     //this.particle = new particle[numParticles];
     
     enemies = new ArrayList<Enemy>();
+    bullets = new ArrayList<Bullet>();
   }
   
   void draw() {
@@ -47,6 +48,10 @@ public class Game {
       if(e.x <= 0)
         enemies.remove(i);
     }
+  }
+  
+  void addBullet(int x, int y) {
+    bullets.add(new Bullet(x, y)); 
   }
   
   void ckeckEnemyCollisions() {
