@@ -11,7 +11,7 @@ public class Game {
   public Game() {
     this.player = new Player();
     this.status = Status.MENU;
-    //this.particle = new particle[numParticles];
+    
   }
 
   public void drawGame() {
@@ -30,7 +30,6 @@ public class Game {
     if (this.player.getHealth() <= 0) {
       this.status = Status.INACTIVE;
     }
-    println(this.status);
   }
 
   // === assessors ===
