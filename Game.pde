@@ -1,6 +1,6 @@
 public class Game {
-  //private Player;
-  //private Particle[];
+  private Player;
+  private ArrayList<Bullet> bullets;
   
   // variables for enemies
   private ArrayList<Enemy> enemies;
