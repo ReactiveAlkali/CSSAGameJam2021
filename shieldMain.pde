@@ -7,12 +7,11 @@ void setup() {
 
 void draw() {
   background(123);
-
   game.drawGame();
   
 }
 
-void keyPressed  () {
+void keyPressed () {
   if (keyCode == TAB) {
     game.activateShield();
     println("this was run");

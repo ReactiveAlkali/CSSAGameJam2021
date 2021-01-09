@@ -17,17 +17,15 @@ public class Game {
   public void drawGame() {
     this.player.drawPlayer();
     this.player.movePlayer();
-
-    activateShield();
+    this.player.drawShield();    
+    
   }
-
 
   private void activateShield() {  
-    if (this.player.getShield() > 0) {
-      this.player.drawShield();
-    }
+      this.player.changeShieldStatus();
   }
 
+//----------------------------------------------
   private void checkStatus() {
     if (this.player.getHealth() <= 0) {
       this.status = Status.INACTIVE;
