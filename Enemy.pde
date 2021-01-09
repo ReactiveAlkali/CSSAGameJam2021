@@ -31,11 +31,7 @@ public class Enemy extends Entity {
     if(fireTimer <= 0 ) 
     {
       fireTimer = fireRate;
-<<<<<<< HEAD
       game.addBullet(this.x, this.y);
-=======
-      game.addBullet(this.x, this,y);
->>>>>>> 9ee4d16e7c5d22ca22ee8aa50ba4f30cb1a21c51
     }
   }
   
