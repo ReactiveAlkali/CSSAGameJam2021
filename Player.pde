@@ -55,6 +55,11 @@ public class Player extends Entity {
   public int getShield() {
     return this.shield;
   }
+  
+  public boolean isShieldOn()
+  {
+    return this.shieldStatus;
+  }
 
   public void setHealth(int n) {
     this.health = n;
