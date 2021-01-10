@@ -135,7 +135,7 @@ public class Game {
 
     for (Bullet q : bullets)
     {
-      if (player.isColliding(q))
+      if (player.isColliding(q) && !reflects.contains(q))
       {
         if (player.isShieldOn())
         {
