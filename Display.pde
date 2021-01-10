@@ -5,7 +5,7 @@ static PImage creditPressedImage = null;
 static PImage exitImage = null;
 static PImage exitPressedImage = null;
 static PImage gameOverImage = null;
-
+static PImage creditsImage = null;
 
 class Display{
   boolean ActiveP = false;
@@ -34,7 +34,9 @@ class Display{
     
   if(gameOverImage == null)
     gameOverImage = loadImage("Assets/gameOverOrig.png"); 
-
+  if(creditsImage == null)
+    creditsImage = loadImage("Assets/credits.png"); 
+    
   }
 
   //MAIN
@@ -84,6 +86,12 @@ class Display{
     int goX = (width - gameOverImage.width)/2;
     int goY = (height - gameOverImage.height)/2;
     image(gameOverImage,goX,goY);
+  }
+  
+  void credits(){
+    int goX = (width - gameOverImage.width)/2;
+    int goY = (height - gameOverImage.height)/2;
+    image(creditsImage,goX,goY);
   }
   
 
