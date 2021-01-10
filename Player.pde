@@ -1,3 +1,4 @@
+static PImage playerImage = null;
 
 public class Player extends Entity {
   private final int DIAM = 100;
@@ -11,16 +12,24 @@ public class Player extends Entity {
   public Player() {
     this.x = width/2;
     this.y = height/2;
-    this.entityWidth = 25;
-    this.entityHeight = 25;
+    this.entityWidth = 100;
+    this.entityHeight = 100;
     this.health = maxHealth;
     this.shield = maxShield;
     this.shieldStatus = false;
+    
+    if(playerImage == null)
+      playerImage = loadImage("Assets/Blue/alienship_new.png");
   }
 
   public void drawPlayer() {
-    fill(255);
-    rect(this.x - entityWidth/2, this.y - entityWidth/2, entityWidth, entityWidth);
+    pushMatrix();
+    
+    translate(this.x, this.y);
+    rotate(HALF_PI);
+    image(playerImage, -entityWidth/2, -entityHeight/2, entityWidth, entityHeight);
+    
+    popMatrix();
   }
 
   private void movePlayer() {
