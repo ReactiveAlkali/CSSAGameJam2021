@@ -1,7 +1,9 @@
+static PImage enemyImage = null;
+
 public class Enemy extends Entity {
   
   private int speed = 2;
-  private int fireRate = 4;
+  private int fireRate = 100;
   private int fireTimer = 0;
   
   // Constructor for creating an enemy instance
@@ -10,12 +12,21 @@ public class Enemy extends Entity {
     this.x = x;
     this.y = y;
     
-    this.entityWidth = 60;
-    this.entityHeight = 30;
+    if(enemyImage == null)
+      enemyImage = loadImage("Assets/Red/spaceship_enemy_red.png");
+    
+    this.entityWidth = 75;
+    this.entityHeight = 75;
   }
   
   void draw() {
-    ellipse(this.x, this.y, entityWidth, entityHeight);
+    pushMatrix();
+    
+    translate(x,y);
+    rotate(3.f * HALF_PI);
+    image(enemyImage, -entityWidth / 2, -entityHeight / 2, entityWidth, entityHeight);
+    
+    popMatrix();
   }
   
   void moveEnemy() {
