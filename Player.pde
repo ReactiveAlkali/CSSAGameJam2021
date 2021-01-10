@@ -1,11 +1,9 @@
+static PImage playerImage = null;
 
-public class Player {
-  private final int PLAYER_SIZE = 25;
+public class Player extends Entity {
   private final int DIAM = 100;
   private final int maxHealth = 100;
-  private final int maxShield = 120;
-  private int x;
-  private int y;
+  private final int maxShield = 200;
 
   private int health;
   private int shield;
@@ -14,14 +12,24 @@ public class Player {
   public Player() {
     this.x = width/2;
     this.y = height/2;
+    this.entityWidth = 100;
+    this.entityHeight = 100;
     this.health = maxHealth;
     this.shield = maxShield;
     this.shieldStatus = false;
+
+    if (playerImage == null)
+      playerImage = loadImage("Assets/Blue/alienship_new.png");
   }
 
   public void drawPlayer() {
-    fill(255);
-    rect(this.x - PLAYER_SIZE/2, this.y - PLAYER_SIZE/2, PLAYER_SIZE, PLAYER_SIZE);
+    pushMatrix();
+
+    translate(this.x, this.y);
+    rotate(HALF_PI);
+    image(playerImage, -entityWidth/2, -entityHeight/2, entityWidth, entityHeight);
+
+    popMatrix();
   }
 
   private void movePlayer() {
@@ -41,11 +49,11 @@ public class Player {
   }
 
   // === assessors ===
-  public int getPlayerX() {
+  public float getPlayerX() {
     return this.x;
   }
 
-  public int getPLayerY() {
+  public float getPLayerY() {
     return this.y;
   }
 
@@ -55,6 +63,16 @@ public class Player {
 
   public int getShield() {
     return this.shield;
+  }
+
+  public boolean isShieldOn()
+  {
+    return this.shieldStatus;
+  }
+
+  public void changeShield(int n)
+  {
+    this.shield += n;
   }
 
   public void setHealth(int n) {
