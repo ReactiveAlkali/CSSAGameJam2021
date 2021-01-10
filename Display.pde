@@ -1,22 +1,19 @@
 class Display{
-  
-  //Default
-  int health = 100;
-  int shieldPower = 125;
-  
+
   // top left [Default]
   int barX = 5;
   int barY = 5;
   
-  public Display(Player current) {
-    //update health and shield
-    health = current.health;
-    shieldPower = current.shield;
-    //update position
-    //barX = x;
-    //barY = y;
-  }
+  //[DEFAULT]
+  public Display() {}
   
+  //MAIN
+  public Display(int x, int y) {
+    //update position
+    barX = x;
+    barY = y;
+  }
+
   // MENU
   void initialMessage() {
     int posX = width/4;
@@ -34,14 +31,14 @@ class Display{
     text(message, entityWidth/2, entityHeight);
     noFill();
   }
-
-  void healthBar() {
+  
+  void healthBar(int currentHealth) {
     int x = barX;
     int y = barY;
-    int barHeight = height/20;
+    int barHeight = height/25;
     int barWidth = width/4;
     int sbarHeight = barHeight;
-    int sbarWidth = (width/4)*health/100;
+    int sbarWidth = (width/4)*currentHealth/100;
     
     //block 
     fill(0);//black
@@ -49,14 +46,18 @@ class Display{
     //stat bar
     fill(255,0,0);//red
     rect(x, y,sbarWidth, sbarHeight);
+    //HealthText
+    fill(255);
+    textSize(barHeight);
+    text("HEALTH", x, y + textAscent());
     noFill();
   }
   
-  void shieldBar() {
-    int barHeight = height/20;
+  void shieldBar(int currentShield) {
+    int barHeight = height/25;
     int barWidth = width/4;
     int sbarHeight = barHeight;
-    int sbarWidth = (width/4)*shieldPower/100;
+    int sbarWidth = (width/4)*currentShield/100;
     
     int margin = barY + 1;
     int x = barX;
@@ -67,7 +68,9 @@ class Display{
     //stat bar
     fill(255,0,0);//red
     rect(x, y,sbarWidth, sbarHeight);
+    fill(255);
+    textSize(barHeight);
+    text("SHIELD", x, y + textAscent());
     noFill();
   }
 }
-
