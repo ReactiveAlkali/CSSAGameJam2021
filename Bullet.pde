@@ -25,6 +25,11 @@ class Bullet extends Entity {
     draw();
   }
   
+  void reflect()
+  {
+    speed = -5;
+  }
+  
   void draw()//can be put into entity class
   {
     if(isAlive)
