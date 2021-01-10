@@ -11,6 +11,9 @@ public class Game {
 
   private ArrayList<Bullet> bullets;
   private ArrayList<Bullet> reflects = new ArrayList<Bullet>();
+  
+  private int lastChange = millis();
+  private int current;
 
   // variables for enemies
   private ArrayList<Enemy> enemies;
@@ -55,6 +58,7 @@ public class Game {
 
   private void activateShield() {  
     this.player.changeShieldStatus();
+    lastChange = millis();
   }
 
   private Star[] initStarField() {
@@ -106,6 +110,29 @@ public class Game {
 
   void update() {
     spawnEnemies();
+    current = millis();
+    
+    if (player.isShieldOn())
+    {
+      print(current + " " + lastChange + "\n");
+      if (current - lastChange >= 1)
+      {
+        player.changeShield(-5);
+        lastChange = current;
+      }
+
+      if (player.getShield() <= 0)
+      {
+        this.activateShield();
+      }
+    } else
+    {
+      if (current - lastChange >= 1 && player.getShield() != 200)
+      {
+        player.changeShield(5);
+        lastChange = current;
+      }
+    }
 
     for (int i = 0; i < enemies.size(); i++) {
       Enemy e = enemies.get(i);
