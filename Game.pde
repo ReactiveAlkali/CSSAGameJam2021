@@ -1,7 +1,11 @@
 enum Status {
   MENU, 
-    ACTIVE, 
-    INACTIVE;
+    PLAY,
+    OPTION,
+    CREDIT,
+    QUIT,
+  INACTIVE,
+  ACTIVE;
 }
 
 public class Game {
@@ -163,7 +167,7 @@ public class Game {
     increaseSpawnRate();
   }
 
-  void addBullet(int x, int y) {
+  void addBullet(float x, float y) {
     bullets.add(new Bullet(x, y));
   }
 
@@ -180,7 +184,7 @@ public class Game {
       {
         if (player.isShieldOn())
         {
-          q.reflect();
+          q.reflect(player.x, player.y);
           reflects.add(q);
         } else
         {
