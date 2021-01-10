@@ -1,8 +1,6 @@
 static PImage playImage = null;
-static PImage optionImage = null;
 static PImage creditImage = null;
 static PImage playPressedImage = null;
-static PImage optionPressedImage = null;
 static PImage creditPressedImage = null;
 static PImage exitImage = null;
 static PImage exitPressedImage = null;
@@ -11,7 +9,6 @@ static PImage gameOverImage = null;
 
 class Display{
   boolean ActiveP = false;
-  boolean ActiveO = false;
   boolean ActiveC = false;
   boolean ActiveE = false;
   // top left [Default]
@@ -23,8 +20,6 @@ class Display{
 
   if(playImage == null)
     playImage = loadImage("Assets/MenuScreen/play_buttons.png");
-  if(optionImage == null)
-    optionImage = loadImage("Assets/MenuScreen/optionst_buttons.png");
   if(creditImage == null)
     creditImage = loadImage("Assets/MenuScreen/Creditst_buttons.png");
   if(exitImage == null)
@@ -32,8 +27,6 @@ class Display{
 
   if(playPressedImage == null)
     playPressedImage = loadImage("Assets/MenuScreen/play_buttons_pressed_blue.png");
-  if(optionPressedImage == null)
-    optionPressedImage = loadImage("Assets/MenuScreen/optionst_buttons_pressed.png");
   if(creditPressedImage == null)
     creditPressedImage = loadImage("Assets/MenuScreen/Creditst_buttons_pressed.png");
   if(exitPressedImage == null)
@@ -53,21 +46,17 @@ class Display{
 
   //MENU
   void initialMessage() {
-    int margin = 5;
+    int margin = (width - 3*(playImage.width))/6;
     int heightFix = 3*height/4;
     int playX = margin;
     int playY = heightFix;
-    int optionX = margin + width/4;
-    int optionY = heightFix;
-    int creditX = margin + 2*width/4;
+    int creditX = margin + width/3;
     int creditY = heightFix;
-    
-    int quitX = margin + 3*width/4;
+    int quitX = margin + 2*width/3;
     int quitY = heightFix;
     
     //Display Image
     image(playImage,playX,playY);
-    image(optionImage,optionX,optionY);
     image(creditImage,creditX,creditY);
     image(exitImage,quitX,quitY);
 
@@ -78,11 +67,7 @@ class Display{
         if(mousePressed)
           ActiveP = true;
       }
-      if((mouseX > optionX) && (mouseY > optionY) && (mouseX < optionX + optionImage.width) && (mouseY < optionY + optionImage.height)){
-        image(optionPressedImage,optionX,optionY);
-        if(mousePressed)
-          ActiveO = true;
-      }
+      
       if((mouseX > creditX) && (mouseY > creditY) && (mouseX < creditX + creditImage.width) && (mouseY < creditY + creditImage.height)){
         image(creditPressedImage,creditX,creditY);
         if(mousePressed)
@@ -111,8 +96,6 @@ class Display{
     if(ActiveP){
        state = Status.PLAY;
     }
-    if(ActiveO)
-       state = Status.OPTION;;
     if(ActiveC)
        state = Status.CREDIT;
     if(ActiveE)
