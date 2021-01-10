@@ -163,6 +163,7 @@ public class Game {
     ArrayList<Bullet> rHits = new ArrayList<Bullet>();
     ArrayList<Enemy> eHits = new ArrayList<Enemy>();
 
+    //player collision with bullets
     for (Bullet q : bullets)
     {
       if (player.isColliding(q) && !reflects.contains(q))
@@ -178,7 +179,18 @@ public class Game {
         }
       }
     }
-
+    
+    //player collision with enemies
+    for (Enemy z : enemies)
+    {
+      if (player.isColliding(z))
+      {
+        eHits.add(z);
+        player.setHealth(hp - 30);
+      }
+    }
+    
+    //enemy collision with reflected bullets
     for (Bullet q : reflects)
     {
       for (Enemy z : enemies)
