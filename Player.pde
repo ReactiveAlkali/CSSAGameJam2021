@@ -3,7 +3,7 @@ static PImage playerImage = null;
 public class Player extends Entity {
   private final int DIAM = 100;
   private final int maxHealth = 100;
-  private final int maxShield = 120;
+  private final int maxShield = 200;
 
   private int health;
   private int shield;
@@ -68,6 +68,11 @@ public class Player extends Entity {
   public boolean isShieldOn()
   {
     return this.shieldStatus;
+  }
+  
+  public void changeShield(int n)
+  {
+    this.shield += n;
   }
 
   public void setHealth(int n) {
