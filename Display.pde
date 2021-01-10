@@ -130,7 +130,7 @@ class Display{
     int barHeight = height/20;
     int barWidth = width/4;
     int sbarHeight = barHeight;
-    int sbarWidth = (width/4)*currentShield/100;
+    int sbarWidth = (width/4)*(currentShield/2)/100;
     
     int margin = barY + 1;
     int x = barX;
