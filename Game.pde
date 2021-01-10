@@ -46,7 +46,6 @@ public class Game {
     // player elements
     Status gameStatus = this.display.state();
     Status playerStatus = playerStatus(); 
-    print(gameStatus);
     //STATE MENU
     if( gameStatus == Status.MENU){
       this.display.initialMessage();
