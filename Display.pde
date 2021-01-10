@@ -35,7 +35,7 @@ class Display{
   void healthBar(int currentHealth) {
     int x = barX;
     int y = barY;
-    int barHeight = height/25;
+    int barHeight = height/20;
     int barWidth = width/4;
     int sbarHeight = barHeight;
     int sbarWidth = (width/4)*currentHealth/100;
@@ -49,12 +49,12 @@ class Display{
     //HealthText
     fill(255);
     textSize(barHeight);
-    text("HEALTH", x, y + textAscent());
+    text("HEALTH", x + 5, y + textAscent() - textDescent()/2);
     noFill();
   }
   
   void shieldBar(int currentShield) {
-    int barHeight = height/25;
+    int barHeight = height/20;
     int barWidth = width/4;
     int sbarHeight = barHeight;
     int sbarWidth = (width/4)*currentShield/100;
@@ -70,7 +70,7 @@ class Display{
     rect(x, y,sbarWidth, sbarHeight);
     fill(255);
     textSize(barHeight);
-    text("SHIELD", x, y + textAscent());
+    text("SHIELD", x + 5, y + textAscent() - textDescent()/2);
     noFill();
   }
 }
