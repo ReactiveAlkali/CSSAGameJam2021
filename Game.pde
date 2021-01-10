@@ -10,6 +10,7 @@ public class Game {
   private Star[] starField;
 
   private ArrayList<Bullet> bullets;
+  private ArrayList<Bullet> reflects = new ArrayList<Bullet>();
 
   // variables for enemies
   private ArrayList<Enemy> enemies;
@@ -129,7 +130,7 @@ public class Game {
   void checkCollisions() {
     int hp = player.getHealth();
     ArrayList<Bullet> hits = new ArrayList<Bullet>();
-    ArrayList<Bullet> reflects = new ArrayList<Bullet>();
+    ArrayList<Bullet> rHits = new ArrayList<Bullet>();
     ArrayList<Enemy> eHits = new ArrayList<Enemy>();
 
     for (Bullet q : bullets)
@@ -154,11 +155,13 @@ public class Game {
       {
         if (q.isColliding(z))
         {
-          hits.add(q);
+          rHits.add(q);
           eHits.add(z);
         }
       }
     }
+    bullets.removeAll(rHits);
+    reflects.removeAll(rHits);
     bullets.removeAll(hits);
     enemies.removeAll(eHits);
   }
