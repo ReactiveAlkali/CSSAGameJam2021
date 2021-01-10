@@ -94,9 +94,9 @@ class Display{
   }
   
   void credits(){
-    int goX = (width - gameOverImage.width)/2;
-    int goY = (height - gameOverImage.height)/2;
-    image(creditsImage,goX,goY);
+    int cX = (width - creditsImage.width)/2;
+    int cY = (height - creditsImage.height)/2;
+    image(creditsImage,cX,cY);
   }
   
 
