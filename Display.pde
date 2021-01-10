@@ -6,6 +6,7 @@ static PImage exitImage = null;
 static PImage exitPressedImage = null;
 static PImage gameOverImage = null;
 static PImage creditsImage = null;
+static PImage gameTitle = null;
 
 class Display{
   boolean ActiveP = false;
@@ -36,6 +37,8 @@ class Display{
     gameOverImage = loadImage("Assets/gameOverOrig.png"); 
   if(creditsImage == null)
     creditsImage = loadImage("Assets/credits.png"); 
+  if(gameTitle == null)
+    gameTitle = loadImage("Assets/titleGame.png"); 
     
   }
 
@@ -56,8 +59,10 @@ class Display{
     int creditY = heightFix;
     int quitX = margin + 2*width/3;
     int quitY = heightFix;
-    
+    int gtX = (width - gameTitle.width)/2;
+    int gtY = (height - gameTitle.height)/2;
     //Display Image
+    image(gameTitle,gtX ,gtY - playImage.height/4);
     image(playImage,playX,playY);
     image(creditImage,creditX,creditY);
     image(exitImage,quitX,quitY);
