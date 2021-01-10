@@ -14,8 +14,9 @@ public class Game {
 
   // variables for enemies
   private ArrayList<Enemy> enemies;
-  private int enemySpawnRate = 100;
-  private int enemySpawnTimer = 0;
+  private float enemySpawnRate = 100.f;
+  private float enemySpawnTimer = 0.f;
+  private float spawnRateIncrease = 0.001;
 
   public Game() {
     this.player = new Player();
@@ -121,6 +122,8 @@ public class Game {
     }
 
     checkCollisions();
+    
+    increaseSpawnRate();
   }
 
   void addBullet(int x, int y) {
@@ -164,5 +167,10 @@ public class Game {
     reflects.removeAll(rHits);
     bullets.removeAll(hits);
     enemies.removeAll(eHits);
+  }
+   
+  void increaseSpawnRate() {
+    if(enemySpawnRate > 10) 
+      enemySpawnRate -= spawnRateIncrease;
   }
 }// Game
