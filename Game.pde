@@ -5,10 +5,12 @@ enum Status {
 }
 
 public class Game {
-  private Player player;
   private Status status;
+  private Player player;
+  private Star[] starField;
 
   private ArrayList<Bullet> bullets;
+  private ArrayList<Bullet> reflects = new ArrayList<Bullet>();
 
   // variables for enemies
   private ArrayList<Enemy> enemies;
@@ -19,21 +21,35 @@ public class Game {
   public Game() {
     this.player = new Player();
     this.status = Status.MENU;
+    this.starField = initStarField();
 
-    enemies = new ArrayList<Enemy>();
-    bullets = new ArrayList<Bullet>();
+    this.enemies = new ArrayList<Enemy>();
+    this.bullets = new ArrayList<Bullet>();
   }
 
+  /* if we can somehow move void draw into this function 
+   * that would help keep the drawing parts better organized
+   */
   public void drawGame() {
+    // player elements
     this.player.drawPlayer();
     this.player.movePlayer();
     this.player.drawShield();
+
+    // bullet
+
+    // enemy
+
+    // display
+
+    // star
+    drawStarField();
   }
 
   void draw() {
-    for (Enemy e : enemies) 
+    for (Enemy e : enemies) {
       e.draw();
-
+    }
     update();
   }
 
@@ -41,12 +57,31 @@ public class Game {
     this.player.changeShieldStatus();
   }
 
+  private Star[] initStarField() {
+    this.starField = new Star[400];
+
+    for (int i = 0; i < this.starField.length; i++) {
+      this.starField[i] = new Star();
+    }
+    return starField;
+  }
+
+  private void drawStarField() {
+    int speed = 5;
+    translate(width/2, height/2);
+
+    for (int i = 0; i < starField.length; i++) {
+      starField[i].moveStar(speed);
+      starField[i].drawStar();
+    }
+  }
+
   //private void checkStatus() {
   //  if (this.player.getHealth() <= 0) {
   //    this.status = Status.INACTIVE;
   //  }
   //}
-  
+
   // === assessors ===
   public Status getStatus() {
     return this.status;
@@ -85,7 +120,7 @@ public class Game {
     {
       q.update();
     }
-    
+
     checkCollisions();
     
     increaseSpawnRate();
@@ -96,48 +131,46 @@ public class Game {
   }
 
   void checkCollisions() {
-  int hp = player.getHealth();
+    int hp = player.getHealth();
     ArrayList<Bullet> hits = new ArrayList<Bullet>();
-    ArrayList<Bullet> reflects = new ArrayList<Bullet>();
+    ArrayList<Bullet> rHits = new ArrayList<Bullet>();
     ArrayList<Enemy> eHits = new ArrayList<Enemy>();
-    
+
     for (Bullet q : bullets)
     {
-      if (player.isColliding(q))
+      if (player.isColliding(q) && !reflects.contains(q))
       {
-        if(player.isShieldOn())
+        if (player.isShieldOn())
         {
           q.reflect();
           reflects.add(q);
-        }
-        else
+        } else
         {
           player.setHealth(hp - 10);//each bullet does 10 damage
           hits.add(q);
         }
       }
     }
-    
-    for(Bullet q : reflects)
+
+    for (Bullet q : reflects)
     {
-      for(Enemy z : enemies)
+      for (Enemy z : enemies)
       {
         if (q.isColliding(z))
         {
-          hits.add(q);
+          rHits.add(q);
           eHits.add(z);
         }
       }
     }
+    bullets.removeAll(rHits);
+    reflects.removeAll(rHits);
     bullets.removeAll(hits);
     enemies.removeAll(eHits);
   }
-  
+   
   void increaseSpawnRate() {
     if(enemySpawnRate > 10) 
       enemySpawnRate -= spawnRateIncrease;
-      
-    print(enemySpawnRate);
-    print("\n");
   }
 }// Game

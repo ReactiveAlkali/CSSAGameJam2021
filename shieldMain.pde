@@ -1,4 +1,3 @@
-
 Game game;
 
 static PImage background = null;
