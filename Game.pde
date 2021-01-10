@@ -84,12 +84,49 @@ public class Game {
     {
       q.update();
     }
+    
+    checkCollisions();
   }
 
   void addBullet(int x, int y) {
     bullets.add(new Bullet(x, y));
   }
 
-  void ckeckEnemyCollisions() {
+  void checkCollisions() {
+  int hp = player.getHealth();
+    ArrayList<Bullet> hits = new ArrayList<Bullet>();
+    ArrayList<Bullet> reflects = new ArrayList<Bullet>();
+    ArrayList<Enemy> eHits = new ArrayList<Enemy>();
+    
+    for (Bullet q : bullets)
+    {
+      if (player.isColliding(q))
+      {
+        if(player.isShieldOn())
+        {
+          q.reflect();
+          reflects.add(q);
+        }
+        else
+        {
+          player.setHealth(hp - 10);//each bullet does 10 damage
+          hits.add(q);
+        }
+      }
+    }
+    
+    for(Bullet q : reflects)
+    {
+      for(Enemy z : enemies)
+      {
+        if (q.isColliding(z))
+        {
+          hits.add(q);
+          eHits.add(z);
+        }
+      }
+    }
+    bullets.removeAll(hits);
+    enemies.removeAll(eHits);
   }
 }// Game
