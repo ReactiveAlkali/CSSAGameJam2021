@@ -1,3 +1,4 @@
+static PImage redbulletImage = null;
 
 class Bullet extends Entity {
   int bDiameter;//works as both width and height for entity class
@@ -6,12 +7,15 @@ class Bullet extends Entity {
 
   public Bullet(int startX, int startY) {
     bDiameter = 20;
-    circle(startX, startY, bDiameter);//last value size, adjust to make it look good
+    if(redbulletImage == null)
+      redbulletImage = loadImage("Assets/Red/bullet_red.png");
+    //circle(startX, startY, bDiameter);//last value size, adjust to make it look good
+    
 
     this.x = startX;
     this.y = startY;
-    this.entityWidth = bDiameter;
-    this.entityHeight = bDiameter;
+    this.entityWidth = 50;
+    this.entityHeight = 100;
   }
 
   void update()
@@ -37,7 +41,8 @@ class Bullet extends Entity {
       pushMatrix();
       
       translate(x, y);
-      circle(-this.entityWidth/2, -this.entityWidth/2, this.entityWidth);
+      rotate(3.f * HALF_PI);
+      image(redbulletImage, -entityWidth/2, -entityHeight/2, entityWidth, entityHeight);
       
       popMatrix();
     }
