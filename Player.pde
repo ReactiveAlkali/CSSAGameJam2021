@@ -49,11 +49,11 @@ public class Player extends Entity {
   }
 
   // === assessors ===
-  public int getPlayerX() {
+  public float getPlayerX() {
     return this.x;
   }
 
-  public int getPLayerY() {
+  public float getPLayerY() {
     return this.y;
   }
 

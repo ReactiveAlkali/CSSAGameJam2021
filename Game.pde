@@ -1,13 +1,20 @@
+
 enum Status {
-  MENU, 
-    ACTIVE, 
-    INACTIVE;
+  MENU,
+    PLAY,
+    OPTION,
+    CREDIT,
+    QUIT, 
+  ACTIVE, 
+  INACTIVE;
 }
+
 
 public class Game {
   private Status status;
   private Player player;
   private Star[] starField;
+  private Display display;
 
   private ArrayList<Bullet> bullets;
   private ArrayList<Bullet> reflects = new ArrayList<Bullet>();
@@ -27,26 +34,48 @@ public class Game {
     this.player = new Player();
     this.status = Status.MENU;
     this.starField = initStarField();
+    this.display = new Display();
 
     this.enemies = new ArrayList<Enemy>();
     this.bullets = new ArrayList<Bullet>();
   }
-
   /* if we can somehow move void draw into this function 
    * that would help keep the drawing parts better organized
    */
   public void drawGame() {
     // player elements
-    this.player.drawPlayer();
-    this.player.movePlayer();
-    this.player.drawShield();
-
-    // bullet
-
-    // enemy
-
-    // display
-
+    Status gameStatus = this.display.state();
+    Status playerStatus = playerStatus(); 
+    //STATE MENU
+    if( gameStatus == Status.MENU){
+      this.display.initialMessage();
+    }
+    
+    //STATE PLAY
+    if( gameStatus == Status.PLAY) {
+      if (playerStatus == Status.ACTIVE) {
+        this.player.drawPlayer();
+        this.player.movePlayer();
+        this.player.drawShield();
+    
+        // bullet
+        // enemy
+        // display bars
+        this.display.healthBar(this.player.getHealth());
+        this.display.shieldBar(this.player.getShield());
+      }else
+        this.display.gameOver();
+    }
+    //quit
+    if( gameStatus == Status.QUIT) {
+      exit();
+    }
+    
+    //credits
+    if (gameStatus == Status.CREDIT) {
+      this.display.credits();;
+    }
+    
     // star
     drawStarField();
   }
@@ -163,7 +192,7 @@ public class Game {
     increaseSpawnRate();
   }
 
-  void addBullet(int x, int y) {
+  void addBullet(float x, float y) {
     bullets.add(new Bullet(x, y));
   }
 
@@ -180,7 +209,7 @@ public class Game {
       {
         if (player.isShieldOn())
         {
-          q.reflect();
+          q.reflect(player.x, player.y);
           reflects.add(q);
         } else
         {
@@ -221,5 +250,14 @@ public class Game {
   void increaseSpawnRate() {
     if(enemySpawnRate > 10) 
       enemySpawnRate -= spawnRateIncrease;
+  }
+  
+  //Determine the player status Active or Inactive
+  Status playerStatus() {
+    Status current = Status.ACTIVE;
+    if (this.player.getHealth() < 0){
+      current = Status.INACTIVE;
+    }
+    return current;
   }
 }// Game
