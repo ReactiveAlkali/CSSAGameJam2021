@@ -19,6 +19,5 @@ void draw() {
 void keyPressed () {
   if (keyCode == TAB) {
     game.activateShield();
-    println("this was run");
   }
 }

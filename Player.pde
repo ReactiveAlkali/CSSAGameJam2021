@@ -40,6 +40,7 @@ public class Player extends Entity {
   public void drawShield() {        
     if (this.shieldStatus) {
       noFill();
+      stroke(#15F4EE);
       ellipse(this.x, this.y, DIAM, DIAM);
     }
   }
