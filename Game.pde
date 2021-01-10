@@ -12,8 +12,10 @@ public class Game {
   private ArrayList<Bullet> bullets;
   private ArrayList<Bullet> reflects = new ArrayList<Bullet>();
   
+  //shield variables
   private int lastChange = millis();
   private int current;
+  private boolean shieldDrained = false;
 
   // variables for enemies
   private ArrayList<Enemy> enemies;
@@ -57,8 +59,11 @@ public class Game {
   }
 
   private void activateShield() {  
-    this.player.changeShieldStatus();
-    lastChange = millis();
+    if (!shieldDrained)
+    {
+      this.player.changeShieldStatus();
+      lastChange = millis();
+    }
   }
 
   private Star[] initStarField() {
@@ -112,9 +117,8 @@ public class Game {
     spawnEnemies();
     current = millis();
     
-    if (player.isShieldOn())
+    if (player.isShieldOn() && !shieldDrained)
     {
-      print(current + " " + lastChange + "\n");
       if (current - lastChange >= 1)
       {
         player.changeShield(-5);
@@ -124,14 +128,20 @@ public class Game {
       if (player.getShield() <= 0)
       {
         this.activateShield();
+        shieldDrained = true;
       }
     } else
     {
-      if (current - lastChange >= 1 && player.getShield() != 200)
+      if (current - lastChange >= 1 && player.getShield() < 200)
       {
         player.changeShield(5);
         lastChange = current;
       }
+    }
+    
+    if (player.getShield() >= 200)
+    {
+      shieldDrained = false;
     }
 
     for (int i = 0; i < enemies.size(); i++) {
