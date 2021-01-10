@@ -66,14 +66,14 @@ public class Game {
       }else
         this.display.gameOver();
     }
-    //credits
-    if (gameStatus == Status.CREDIT) {
-      this.display.credits();;
-    }
-    
     //quit
     if( gameStatus == Status.QUIT) {
       exit();
+    }
+    
+    //credits
+    if (gameStatus == Status.CREDIT) {
+      this.display.credits();;
     }
     
     // star
