@@ -1,6 +1,6 @@
 class Entity {
-  int x;
-  int y;
+  float x;
+  float y;
 
   int entityWidth;
   int entityHeight;
