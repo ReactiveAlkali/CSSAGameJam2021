@@ -69,11 +69,6 @@ public class Player extends Entity {
   {
     return this.shieldStatus;
   }
-  
-  public void changeShield(int n)
-  {
-    this.shield += n;
-  }
 
   public void changeShield(int n)
   {
@@ -84,4 +79,3 @@ public class Player extends Entity {
     this.health = n;
   }
 }// Player
-
