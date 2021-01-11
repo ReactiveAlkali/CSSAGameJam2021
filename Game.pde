@@ -187,7 +187,9 @@ public class Game {
       q.update();
     }
 
-    checkCollisions();
+    // Only check collisions if the game is currently in play
+    if(this.display.state() == Status.PLAY)
+      checkCollisions();
     
     increaseSpawnRate();
   }
