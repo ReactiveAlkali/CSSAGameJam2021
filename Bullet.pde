@@ -1,16 +1,23 @@
 static PImage redbulletImage = null;
+static PImage blueBulletImage = null;
 
 class Bullet extends Entity {
   int bDiameter;//works as both width and height for entity class
   boolean isAlive = true;//can be in entity
-  int speed = 5;//reaches end of screen in half second, may need balancing, for now only moves rigth to left
+  float speedX = 5;//reaches end of screen in half second, may need balancing, for now only moves rigth to left
+  float speedY = 0;
+  
+  PImage currImage = null;
+  float imageRotation = 3.f * HALF_PI;
 
-  public Bullet(int startX, int startY) {
+  public Bullet(float startX, float startY) {
     bDiameter = 20;
     if(redbulletImage == null)
       redbulletImage = loadImage("Assets/Red/bullet_red.png");
-    //circle(startX, startY, bDiameter);//last value size, adjust to make it look good
-    
+    if(blueBulletImage == null)
+      blueBulletImage = loadImage("Assets/Blue/bullet.png");
+      
+    currImage = redbulletImage;
 
     this.x = startX;
     this.y = startY;
@@ -20,7 +27,8 @@ class Bullet extends Entity {
 
   void update()
   {
-    x -= speed;
+    x -= speedX;
+    y += speedY;
 
     if (x < - this.entityWidth)
     {
@@ -29,10 +37,30 @@ class Bullet extends Entity {
     draw();
   }
   
-  void reflect()
-  {
-    speed = -5;
+  void reflect(float playerX, float playerY)
+  { 
+    // Calculates the reflection angle
+    float diffX = this.x - playerX;
+    float diffY = playerY - this.y;
+    float reflectAngle = acos(diffX / sqrt(sq(diffX) + sq(diffY)));
+    
+    if(diffY < 0)
+      reflectAngle = 0 - reflectAngle;
+    
+    // Set new speeds
+    speedX = -speedX * cos(2 * reflectAngle);
+    speedY = speedX * sin(2 * reflectAngle);
+    
+    // Set sprite
+    if(diffX < 0) {
+      imageRotation = HALF_PI + 2 * reflectAngle;
+    }
+    else {
+      imageRotation = HALF_PI - 2 * reflectAngle;
+    }
+    currImage = blueBulletImage;
   }
+  
   
   void draw()//can be put into entity class
   {
@@ -41,8 +69,8 @@ class Bullet extends Entity {
       pushMatrix();
       
       translate(x, y);
-      rotate(3.f * HALF_PI);
-      image(redbulletImage, -entityWidth/2, -entityHeight/2, entityWidth, entityHeight);
+      rotate(imageRotation);
+      image(currImage, -entityWidth/2, -entityHeight/2, entityWidth, entityHeight);
       
       popMatrix();
     }

@@ -17,18 +17,18 @@ public class Player extends Entity {
     this.health = maxHealth;
     this.shield = maxShield;
     this.shieldStatus = false;
-    
-    if(playerImage == null)
+
+    if (playerImage == null)
       playerImage = loadImage("Assets/Blue/alienship_new.png");
   }
 
   public void drawPlayer() {
     pushMatrix();
-    
+
     translate(this.x, this.y);
     rotate(HALF_PI);
     image(playerImage, -entityWidth/2, -entityHeight/2, entityWidth, entityHeight);
-    
+
     popMatrix();
   }
 
@@ -49,11 +49,11 @@ public class Player extends Entity {
   }
 
   // === assessors ===
-  public int getPlayerX() {
+  public float getPlayerX() {
     return this.x;
   }
 
-  public int getPLayerY() {
+  public float getPLayerY() {
     return this.y;
   }
 
@@ -64,7 +64,7 @@ public class Player extends Entity {
   public int getShield() {
     return this.shield;
   }
-  
+
   public boolean isShieldOn()
   {
     return this.shieldStatus;
@@ -75,7 +75,13 @@ public class Player extends Entity {
     this.shield += n;
   }
 
+  public void changeShield(int n)
+  {
+    this.shield += n;
+  }
+
   public void setHealth(int n) {
     this.health = n;
   }
 }// Player
+

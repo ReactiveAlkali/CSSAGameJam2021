@@ -1,6 +1,6 @@
 class Entity {
-  int x;
-  int y;
+  float x;
+  float y;
 
   int entityWidth;
   int entityHeight;
@@ -23,15 +23,15 @@ class Entity {
     float otherMaxY = other.y + entityHeight / 2;
 
     //check collisions along the X-axis
-    if ((minX > otherMinX && minX < otherMaxX) ||
-      (maxX > otherMinX && maxX < otherMaxX))
+    if ((minX >= otherMinX && minX <= otherMaxX) ||
+      (maxX >= otherMinX && maxX <= otherMaxX))
     {
       collidingX = true;
     }
 
     //check collisions along the Y-axis
-    if ((minY > otherMinY && minY < otherMaxY) ||
-      (maxY > otherMinY && maxY < otherMaxY))
+    if ((minY >= otherMinY && minY <= otherMaxY) ||
+      (maxY >= otherMinY && maxY <= otherMaxY))
     {
       collidingY = true;
     }
