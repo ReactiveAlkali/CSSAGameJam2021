@@ -73,7 +73,7 @@ public class Game {
     
     //credits
     if (gameStatus == Status.CREDIT) {
-      this.display.credits();;
+      this.display.credits();
     }
     
     // star
